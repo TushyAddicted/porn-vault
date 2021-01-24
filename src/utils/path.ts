@@ -9,7 +9,7 @@ export function libraryPath(str: string): string {
 
 export const isDocker = (function (): boolean {
   try {
-    return readFileSync("/proc/self/cgroup", "utf8").includes("docker");
+    return readFileSync("/proc/self/cgroup", "utf8").includes("docker") || readFileSync("/proc/self/cgroup", "utf8").includes("containerd") || readFileSync("/proc/self/cgroup", "utf8").includes("kubepods");
   } catch (_) {
     // Will only have error if not in a docker environment
     return false;
